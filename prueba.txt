@@ -1,0 +1,6 @@
+formulario ~>> [
+    < 
+        tipo: "etiqueta",
+        valor: "Pablo Javier:"
+    >
+]
