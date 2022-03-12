@@ -4,25 +4,23 @@ formulario ~>> [
         valor: "Pablo Javier:"
     >,
     < 
-        tipo: "etiqueta",
-        valor: "Pablo Javier:",
-        fondo: "ingrese nombre" 
+        tipo: "texto",
+        valor: "Camilo Contreraas:",
+        fondo: "ingrese nombre"
     >,
-    <   
+    <
         tipo: "grupo-radio",
         nombre: "sexo",
         valores: ['Masculino','Femenino']
     >,
     <
         tipo: "grupo-option",
-        valores: ['Guatemala','El Salvador', 'Honduras'],
-        nombre: "pais"
-        
+        nombre: "pais",
+        valores: ['Guatemala','El Salvador','Honduras']
     >,
     <
         tipo: "boton",
-        evento: <entrada>,
-        valor: "Valor"
-        
+        valor: "Valor",
+        evento: <info>
     >
-]
+]   
