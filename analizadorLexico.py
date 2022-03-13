@@ -64,7 +64,7 @@ class AnalizadorLexico:
                     self.guardar(caracter,"]",posicion, linea)
                     estado = 0
                 elif caracter == "'":
-                    self.guardar(caracter,"'",posicion, linea)
+                
                     estado = 13
                 elif caracter == '"':
                     #para eliminar las primeras comillas 
@@ -134,6 +134,10 @@ class AnalizadorLexico:
                     self.guardar(aux,"evento", posicion, linea)
                     estado = 0
                     aux =""
+                elif aux == "nombre":
+                    self.guardar(aux,"nombre", posicion, linea)
+                    estado = 0
+                    aux =""
                 elif not caracter.isalpha():
                     estado = 0
                 #aca termina el analisis del estado 1 por si vienen errores se agrega el else  
@@ -155,12 +159,12 @@ class AnalizadorLexico:
                 posicion += 1
                 
                 if caracter == "'":
-                    self.guardar(aux, "comilla", posicion, linea)
+                    aux = aux.replace("'",'')
+                    self.guardar(aux, "texto2", posicion, linea)
                     estado = 0
                     aux =""
         
-        for Token in self.listaTokens:
-            print(Token.lexema)
+    
     
         
                 
