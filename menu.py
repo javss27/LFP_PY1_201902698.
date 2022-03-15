@@ -17,8 +17,7 @@ from tkinter.filedialog import askopenfilename
 
 
 class interfazGrafica():
-    def obtenerTexto(self):
-        self.texto = self.analizadorLexico.leerArchivo(askopenfilename())
+    
 
     
     def  __init__(self, master):
@@ -38,7 +37,7 @@ class interfazGrafica():
         
         #boton cargar
         
-        self.botonCargar = Button(master, text="Cargar Archivo" , command= self.obtenerTexto())
+        self.botonCargar = Button(master, text="Cargar Archivo", command = self.obtenerTexto() )
         self.botonCargar.pack()
         self.botonCargar.place(x=170,y=40)
         self.botonCargar.config(width=12, height=3)
@@ -70,7 +69,10 @@ class interfazGrafica():
         texto.config(width=67, height=10, font=("Consolas",12), 
              padx=0, pady=15)
         texto.place(x=60,y=100)
-        #texto.insert()
+        texto.insert(INSERT, self.texto  )
+    
+    def obtenerTexto(self):
+        self.texto = self.analizadorLexico.leerArchivo(askopenfilename())
 
 
                                     
