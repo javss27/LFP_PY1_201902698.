@@ -30,8 +30,7 @@ class AnalizadorLexico:
     def __init__(self):
         self.listaTokens = []
         self.listaErrores = []
-        self.iniciarAnalisis()
-        analizadorSintactico(self.listaTokens)
+        
 
    
 

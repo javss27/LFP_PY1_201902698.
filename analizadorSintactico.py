@@ -48,23 +48,34 @@ class analizadorSintactico():
 
 
     def escribir(self):
+        print(self.tipo)
         if self.tipo == "etiqueta":
             self.resultado += "<div> <label> "+ self.valor + "</label> </div>\n"
             self.limpiar()
+        # para hacer el cuadrito de texto 
         elif self.tipo == "texto":
-            self.resultado += ' <div> < input type="text" placeholder="'+self.fondo +'" > </div>\n' 
+            self.resultado += '<div> <input id="news" type="text" placeholder="'+self.fondo+'" name="seach"</div> '
+            #self.resultado += ' <div> < input type="text" placeholder="'+self.fondo +'" > </div>\n' 
             self.limpiar()
+        #para el radio button     
         elif self.tipo == "grupo-radio":
             self.resultado += " <div> <p>" + self.nombre +":</p> </div>"
             if len(self.valores) > 0:
                 for valor in self.valores:
-                    self.resultado += '<div> <input type="radio" id="'+ valor +'" value="'+ valor +'"><label for="'+ valor +'">'+ valor +'</label></div>\n'
-            else:    
-                 self.resultado += '<div> <input type="radio" id="'+ self.valor +'" value="'+ self.valor +'"><label for="'+ self.valor +'">'+ self.valor +'</label></div>\n'
+                    self.resultado += '<div> <input type="radio" id="'+ valor +'"" name="fav_language" value="HTML"> <label for="html">'+ valor +'</label><br>  </div>'
+                    #self.resultado += '<div> <input type="radio" id="'+ valor +'"" name="fav_language" value="HTML"> <label for="html">'+ valor +'</label><br>  </div>'
+                    #self.resultado += '<div><input type="radio" id="'+ valor +'" name="'+ valor +'" value="HTML"></div>'
+                    #self.resultado += '<div> <input type="radio" id="'+ valor +'" value="'+ valor +'"><label for="'+ valor +'">'+ valor +'</label></div>\n'
+            else: 
+                self.resultado += '<div> <input type="radio" id="html" name="fav_language" value="HTML"> <label for="html">'+ self.valor +'</label><br>  </div>'
+                #self.resultado += '<div> <input type="radio" id="html" name="fav_language" value="HTML"> <label for="html">'+ self.valor +'</label><br>  </div>'
+                #self.resultado += '<div><input type="radio" id="'+ self.valor +'" name="'+ self.valor +'" value="HTML"></div>'   
+                #self.resultado += '<div> <input type="radio" id="'+ self.valor +'" value="'+ self.valor +'"><label for="'+ self.valor +'">'+ self.valor +'</label></div>\n'
             self.limpiar()
-
+        #los que salen en list
         elif self.tipo == "grupo-option":
-            self.resultado += '<div> <label for="'+ self.nombre +'">'+ self.nombre +':</label> <\div>\n'
+            
+            self.resultado += '<div> <label for="'+ self.nombre +'">'+ self.nombre +':</label> </div>\n'
             self.resultado += '<select name="'+ self.nombre +'" id="'+ self.nombre +'">'
             
             if len(self.valores) > 0:
@@ -74,9 +85,12 @@ class analizadorSintactico():
                     self.resultado += '<option value = "'+ self.valor +'">'+ self.valor +'</option>'
             self.resultado += '</select>'
             self.limpiar()
-
+        #para generar el boton 
         elif self.tipo == "boton":
-            self.resultado  += '<div> <button type="button">'+self.valor+'</button><\div>\n'
+            self.resultado += '<div> <button name="button">'+self.valor+'</button> </div>'
+            
+            #self.resultado += '<div><button id="'+self.valor+'" type="submit">"'+self.valor+'"</button></div>'
+            #self.resultado  += '<div> <button type="button">'+self.valor+'</button></div>\n'
             self.limpiar()
 
 
@@ -204,10 +218,10 @@ class analizadorSintactico():
     def tiposDos(self):
         
         if self.aux.lexema == "entrada":
-            self.tipo = self.aux.lexema
+            self.evento = self.aux.lexema
             self.obtenerSiguiente()
         elif self.aux.lexema == "info":
-            self.tipo = self.aux.lexema
+            self.evento = self.aux.lexema
             self.obtenerSiguiente()
     
     def paraValores(self):

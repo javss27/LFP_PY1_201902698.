@@ -1,11 +1,11 @@
 formulario ~>> [
     < 
         tipo: "etiqueta",
-        valor: "Pablo Javier:"
+        valor: "Nombre:"
     >,
     < 
         tipo: "texto",
-        valor: "Camilo Contreraas:",
+        valor: "Nombre:",
         fondo: "ingrese nombre"
     >,
     <
