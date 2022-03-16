@@ -1,4 +1,5 @@
-
+from cgitb import html
+import os 
 
 
 
@@ -8,6 +9,7 @@ class analizadorSintactico():
     def __init__(self, lista):
         self.lista = lista 
         self.posicion = 0
+        
         self.tipo = ""
         self.valor = ""
         self.fondo= ""
@@ -25,6 +27,7 @@ class analizadorSintactico():
         print(self.aux.lexema)
         
     def iniciarAnalisis(self):
+        
         if self.aux.tipo == "formulario":
             self.obtenerSiguiente()
             if self.aux.tipo == "~":
@@ -111,6 +114,11 @@ class analizadorSintactico():
                 self.elementos()   
             elif self.aux.tipo == "]":
                 self.resultado += "</body> </html>"
+                
+                # Abriendo el archivo en modo de escritura
+                file = open('archivo.html', "w")
+                file.write(self.resultado)
+                file.close()
                 print("terminado")
     
     def elemento(self):

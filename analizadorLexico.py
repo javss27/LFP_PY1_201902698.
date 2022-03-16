@@ -22,10 +22,10 @@ class AnalizadorLexico:
         contenido = archivo.read()
         return contenido
 
-    def iniciarAnalisis(self):
-        ruta = askopenfilename()
-        leer = self.leerArchivo(ruta)
-        self.analizador(leer) 
+    def iniciarAnalisis(self, contenido):
+        
+        self.analizador(contenido)
+        analizadorSintactico(self.listaTokens)
 
     def __init__(self):
         self.listaTokens = []
