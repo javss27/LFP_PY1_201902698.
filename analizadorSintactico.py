@@ -90,8 +90,8 @@ class analizadorSintactico():
             self.limpiar()
         #para generar el boton 
         elif self.tipo == "boton":
-            self.resultado += '<div> <button name="button">'+self.valor+'</button> </div>'
-            
+            self.resultado += '<div> <button name="button">'+self.valor+'</button>  </div>'
+           
             #self.resultado += '<div><button id="'+self.valor+'" type="submit">"'+self.valor+'"</button></div>'
             #self.resultado  += '<div> <button type="button">'+self.valor+'</button></div>\n'
             self.limpiar()
@@ -230,6 +230,7 @@ class analizadorSintactico():
             self.obtenerSiguiente()
         elif self.aux.lexema == "info":
             self.evento = self.aux.lexema
+            self.evento = '<div> <iframe </iframe> </div>'
             self.obtenerSiguiente()
     
     def paraValores(self):

@@ -1,6 +1,6 @@
 
-import sys 
 from logging import root
+
 
 from click import command
 
@@ -13,7 +13,7 @@ from tkinter import Tk, Label, Button
 from tkinter import *
 from tkinter import ttk
 from tkinter.filedialog import askopenfilename
-
+from Token import Error
 
 
 class interfazGrafica():
@@ -37,6 +37,12 @@ class interfazGrafica():
         self.botonAnlizar.place(x=60,y=40)
         self.botonAnlizar.config(width=12, height=3)
         
+        #boton actualizar .form
+        self.botonActualizar = Button(master, text="Actualizar Archivo", command = self.actualizarArchivo )
+        self.botonActualizar.pack()
+        self.botonActualizar.place(x=60,y=350)
+        self.botonActualizar.config(width=13, height=3)
+
         #boton cargar
         
         self.botonCargar = Button(master, text="Cargar Archivo", command = self.obtenerTexto )
@@ -51,7 +57,7 @@ class interfazGrafica():
         self.botonTokens.place(x= 270,y=40)
         self.botonTokens.config(width=12, height=3)
         #boton reporte errores
-        self.botonErrores = Button(master, text="Reporte Errores", )
+        self.botonErrores = Button(master, text="Reporte Errores", command = self.reporteErrores )
         self.botonErrores.pack()
         self.botonErrores.place(x= 370,y=40)
         self.botonErrores.config(width=12, height=3)
@@ -98,9 +104,20 @@ class interfazGrafica():
       
     #para los errores igual que con tokens pero con variable errores
     #como sobre escribir un archivo txt
+    def reporteErrores(self):
+        self.analizadorLexico.listaErrores
+        erroress  = '<!DOCTYPE html> <html lang="es"> <head><meta charset="UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>REPORTE</title><linkhref="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"crossorigin="anonymous"/><body><h1 class="text-center">Reporte Errores</h1><hr /><div class="m-2 p-2"><table class="table table-striped"><thead><tr> <tr> <th scope="col">Errores Lexicos.</th><th scope="col">Caracter</th><th scope="col">Fila.</th><th scope="col">Columna.</th></tr></thead><tbody>'
+        for  Error in self.analizadorLexico.listaErrores:
+            erroress += '<tr> <td>'+ str(Error.lexema) +'</td> <td>'+ str(Error.tipo) +'</td><td>'+ str(Error.linea) +'</td><td>'+ str(Error.columna) +'</td></tr>'
+        erroress += '</tbody></table> </div><hr /><scriptsrc="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"  crossorigin="anonymous"></script></body></html>'
+        # Abriendo el archivo en modo de escritura
+        file = open('reporteTokens.html', "w")
+        file.write(erroress)
+        file.close()
       
-   
-    
+    def actualizarArchivo(self):
+        result = self.textoDos.get("1.0","end")
+        print(result)
     
     
       
