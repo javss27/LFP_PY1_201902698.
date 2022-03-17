@@ -90,8 +90,12 @@ class analizadorSintactico():
             self.limpiar()
         #para generar el boton 
         elif self.tipo == "boton":
-            self.resultado += '<div> <button name="button">'+self.valor+'</button>  </div>'
-           
+            #self.resultado += '<div> <button name="button">'+self.valor+'</button>  </div>'
+            #este si funciona
+            #self.resultado += '<div> <script type="text/javascript"> function info(){var ifrm = document.createElement("iframe"); ifrm.setAttribute("src", "info.html");ifrm.style.width ="100%"; ifrm.style.height = "400px"; document.getElementById("info").append(ifrm);} </script> <input type="button" onclick="info()"value='+self.valor+'> </div>'
+            
+            #este es el del iframe de prueba
+            self.resultado += '<div> <script <iframe src="pagina_fuente.html" width=290 height=250>Texto para cuando el navegador no conoce la etiqueta iframe</iframe> </script> <input type="button" onclick="button"value='+self.valor+'>  </div>'
             #self.resultado += '<div><button id="'+self.valor+'" type="submit">"'+self.valor+'"</button></div>'
             #self.resultado  += '<div> <button type="button">'+self.valor+'</button></div>\n'
             self.limpiar()
@@ -230,7 +234,7 @@ class analizadorSintactico():
             self.obtenerSiguiente()
         elif self.aux.lexema == "info":
             self.evento = self.aux.lexema
-            self.evento = '<div> <iframe </iframe> </div>'
+            
             self.obtenerSiguiente()
     
     def paraValores(self):

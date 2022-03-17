@@ -88,14 +88,18 @@ class interfazGrafica():
         self.textoDos.insert(INSERT, self.texto  )
 
     def analizar(self):
-        self.analizadorLexico.iniciarAnalisis(self.texto)
+        self.analizadorLexico.iniciarAnalisis(self.textoDos.get("1.0","end"))
+    
+    def actualizarArchivo(self):
+        result = self.textoDos.get("1.0","end")
+        print(result)
 
     def reporteTokens(self):
         self.analizadorLexico.listaTokens
         #para crear el html
-        tokens = '<!DOCTYPE html> <html lang="es"> <head><meta charset="UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>REPORTE</title><linkhref="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"crossorigin="anonymous"/><body><h1 class="text-center">Reporte Errores</h1><hr /><div class="m-2 p-2"><table class="table table-striped"><thead><tr> <tr> <th scope="col">Errores Lexicos.</th><th scope="col">Caracter</th><th scope="col">Fila.</th><th scope="col">Columna.</th></tr></thead><tbody>'
+        tokens = '<!DOCTYPE html> <html lang="es"> <head><meta charset="UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>REPORTE</title><linkhref="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"crossorigin="anonymous"/><body><h1 class="text-center">Reporte Tokens</h1><hr /><div class="m-2 p-2"><table class="table table-striped"><thead><tr> <tr> <th scope="col">Token.</th><th scope="col">Lexema</th><th scope="col">Fila.</th><th scope="col">Columna.</th></tr></thead><tbody>'
         for Token in self.analizadorLexico.listaTokens:
-            tokens +='<tr> <td>'+ str(Token.lexema) +'</td> <td>'+ str(Token.tipo) +'</td><td>'+ str(Token.linea) +'</td><td>'+ str(Token.columna) +'</td></tr>'
+            tokens +='<tr> <td>'+ str(Token.tipo) +'</td> <td>'+ str(Token.lexema) +'</td><td>'+ str(Token.linea) +'</td><td>'+ str(Token.columna) +'</td></tr>'
         tokens += '</tbody></table> </div><hr /><scriptsrc="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"  crossorigin="anonymous"></script></body></html>'
         # Abriendo el archivo en modo de escritura
         file = open('reporteTokens.html', "w")
@@ -111,13 +115,11 @@ class interfazGrafica():
             erroress += '<tr> <td>'+ str(Error.lexema) +'</td> <td>'+ str(Error.tipo) +'</td><td>'+ str(Error.linea) +'</td><td>'+ str(Error.columna) +'</td></tr>'
         erroress += '</tbody></table> </div><hr /><scriptsrc="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"  crossorigin="anonymous"></script></body></html>'
         # Abriendo el archivo en modo de escritura
-        file = open('reporteTokens.html', "w")
+        file = open('reporteErrores.html', "w")
         file.write(erroress)
         file.close()
       
-    def actualizarArchivo(self):
-        result = self.textoDos.get("1.0","end")
-        print(result)
+    
     
     
       

@@ -85,6 +85,8 @@ class AnalizadorLexico:
                 elif caracter.isalpha():
                     aux += caracter
                     estado = 1
+                elif caracter == " ":
+                    estado = 0
                 else:
                     self.errores(caracter,"TipoError",posicion, linea)
                     #agregar donde crea que puede venir un errorxº
@@ -139,10 +141,10 @@ class AnalizadorLexico:
                     aux =""
                 elif not caracter.isalpha():
                     estado = 0
-                #aca termina el analisis del estado 1 por si vienen errores se agrega el else  
-                else:
                     self.errores(caracter,"TipoError",posicion, linea)
                     #agregar donde crea que puede venir un error
+                #aca termina el analisis del estado 1 por si vienen errores se agrega el else  
+                    
             elif estado == 11:
                 aux += caracter
                 posicion += 1
