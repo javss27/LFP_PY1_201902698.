@@ -3,7 +3,7 @@ from logging import root
 
 from turtle import back
 from webbrowser import BackgroundBrowser
-
+import webbrowser
 
 from click import command
 from flask import Blueprint
@@ -71,12 +71,12 @@ class interfazGrafica():
         self.botonErrores.place(x= 370,y=45)
         self.botonErrores.config(width=12, height=3)
         #boton reporte Manual tecnico
-        self.botonManual = Button(master, text="Manual de Usuario", background="#3B89DC", command = self.manualTecnico )
+        self.botonManual = Button(master, text="Manual Tecnico", background="#3B89DC", command = self.manualTecnico )
         self.botonManual.pack()
         self.botonManual.place(x=470,y=45   )
         self.botonManual.config(width=13, height=3)
         #boton reporte Manual usuario
-        self.botonManualUsuario = Button(master, text="Manual Tecnico", background="#3B89DC", command= self.manualUsuario )
+        self.botonManualUsuario = Button(master, text="Manual de Usuario", background="#3B89DC", command= self.manualUsuario )
         self.botonManualUsuario.pack()
         self.botonManualUsuario.place(x=575,y=45)
         self.botonManualUsuario.config(width=12, height=3)
@@ -133,13 +133,15 @@ class interfazGrafica():
         file.write(erroress)
         file.close()
 
-    def manualUsuario():
-        file = open('manualUsuario.html', "w")
-        file.close
+    def manualUsuario(self):
+        webbrowser.open_new(r'ManualDeUsuarioProyecto1.pdf')
+        
 
-    def manualTecnico():
-        file = open('manualTecnico.html', "w")
-        file.close
+    def manualTecnico(self):
+        
+        webbrowser.open_new(r'ManualtecnicoProyecto1.pdf')
+        
+       
       
     
     

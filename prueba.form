@@ -20,7 +20,12 @@ formulario ~//>> [
     >,
     <
         tipo: "boton",
-        valor: "Valor",
+        valor: "info",
         evento: <info>
+    >,
+    <
+        tipo: "boton",
+        valor: "entrada",
+        evento: <entrada>
     >
 ]   

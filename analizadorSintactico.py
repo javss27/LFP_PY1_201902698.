@@ -38,7 +38,7 @@ class analizadorSintactico():
                         self.obtenerSiguiente()
                         if self.aux.tipo == "[":
                             self.obtenerSiguiente()
-                            self.resultado += "<!DOCTYPE <html><form>  <head> <title> Formulario LFP </title>   </head> <body></form> "
+                            self.resultado += "<!DOCTYPE <html>  <head> <title> Formulario LFP </title>    </head> <body> <form>"
                             self.elementos()
 
     def limpiar(self):
@@ -53,16 +53,16 @@ class analizadorSintactico():
     def escribir(self):
         print(self.tipo)
         if self.tipo == "etiqueta":
-            self.resultado += "<form> <div> <label> "+ self.valor + "</label> </div>\n</form> "
+            self.resultado += " <div> <label> "+ self.valor + "</label> </div>\n"
             self.limpiar()
         # para hacer el cuadrito de texto 
         elif self.tipo == "texto":
-            self.resultado += '<form> <div> <input id="news" type="text" placeholder="'+self.fondo+'" name="seach"</div>\n </form> '
+            self.resultado += '<div> <input id="news" type="text" placeholder="'+self.fondo+'" name="seach"</div>\n  '
             #self.resultado += ' <div> < input type="text" placeholder="'+self.fondo +'" > </div>\n' 
             self.limpiar()
         #para el radio button     
         elif self.tipo == "grupo-radio":
-            self.resultado += "<form>  <div> <p>" + self.nombre +":</p> </div></form> "
+            self.resultado += "  <div> <p>" + self.nombre +":</p> </div> "
             if len(self.valores) > 0:
                 for valor in self.valores:
                     self.resultado += ' <div> <input type="radio" id="'+ valor +'"" name="fav_language" value="HTML"> <label for="html">'+ valor +'</label></div>'
@@ -91,9 +91,15 @@ class analizadorSintactico():
         #para generar el boton 
         elif self.tipo == "boton":
            
-            #este es el del iframe de prueba
-            self.resultado += ' <div>  <button </button> </div> '
-
+            if self.evento == "info":
+                #este es el del iframe de prueba
+                self.resultado += ' <div>  <button type="button" class="btm btn-success" onclick="mostrarInfo()">'+ self.valor +'</button>  <textarea id="info" cols="25" rows="40" hidden required></textarea></div> <script src="index.js"></script> '
+            else:
+                entrada = " "
+                for Token in self.lista:
+                    entrada += Token.lexema+ "\n"
+                self.resultado += ' <div>  <button type="button" class="btm btn-success" onclick="mostrarEntrada()">'+ self.valor +'</button>  <textarea id="entrada" cols="25" rows="40" hidden>'+ entrada +'</textarea></div> <script src="index.js"></script> '
+ 
             self.limpiar()
 
 
@@ -113,7 +119,7 @@ class analizadorSintactico():
                 self.obtenerSiguiente()
                 self.elementos()   
             elif self.aux.tipo == "]":
-                self.resultado += "</body> </html>"
+                self.resultado += " </form> </body> </html> "
                 
                 # Abriendo el archivo en modo de escritura
                 file = open('archivo.html', "w")

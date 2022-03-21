@@ -1,8 +1,9 @@
 function mostrarInfo(){
-    let info = document.getElemenById('info');
+    var info = document.getElementById('info');
     info.removeAttribute('hidden');
 }
 
 function mostrarEntrada(){
-    alert('entrada');
+    var entrada = document.getElementById('entrada');
+    entrada.removeAttribute('hidden');
 }
