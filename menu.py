@@ -1,8 +1,12 @@
 
 from logging import root
 
+from turtle import back
+from webbrowser import BackgroundBrowser
+
 
 from click import command
+from flask import Blueprint
 
 from matplotlib import ticker
 
@@ -27,59 +31,69 @@ class interfazGrafica():
         self.texto = "" 
         self.master = master
         self.analizadorLexico = AnalizadorLexico()
-        master.title("Proyecto 1 LFP")
         
-        self.etiqueta = Label(master, text="****MENÚ****")
+        
+        self.etiqueta = Label(master, text="Menú", background= "#95E7E7")
+        self.etiqueta2 = Label(master,text= "Selecciona la opcion a realizar.",padx=10,pady=1,background= "#95E7E7")
         self.etiqueta.pack()
+        self.etiqueta2.pack()
         #boton analizar
-        self.botonAnlizar = Button(master, text="Analizar Archivo", command = self.analizar )
+        self.botonAnlizar = Button(master, text="Analizar Archivo", command = self.analizar,background="#3B89DC")
         self.botonAnlizar.pack()
-        self.botonAnlizar.place(x=60,y=40)
+        
+        self.botonAnlizar.place(x=164,y=45)
         self.botonAnlizar.config(width=12, height=3)
         
         #boton actualizar .form
-        self.botonActualizar = Button(master, text="Actualizar Archivo", command = self.actualizarArchivo )
+        self.botonActualizar = Button(master, text="Actualizar Archivo", command = self.actualizarArchivo,background="#3B89DC" )
         self.botonActualizar.pack()
-        self.botonActualizar.place(x=60,y=350)
+        self.botonActualizar.place(x=60,y=340)
         self.botonActualizar.config(width=13, height=3)
 
         #boton cargar
         
-        self.botonCargar = Button(master, text="Cargar Archivo", command = self.obtenerTexto )
+        self.botonCargar = Button(master, text="Cargar Archivo", command = self.obtenerTexto, background="#3B89DC")
         self.botonCargar.pack()
-        self.botonCargar.place(x=170,y=40)
+        
+        self.botonCargar.place(x=60,y=45)
         self.botonCargar.config(width=12, height=3)
         
         
         #boton Reporte tokens
-        self.botonTokens = Button(master, text="Reporte Tokens", command = self.reporteTokens)
+        self.botonTokens = Button(master, text="Reporte Tokens", command = self.reporteTokens, background="#3B89DC" )
         self.botonTokens.pack()
-        self.botonTokens.place(x= 270,y=40)
+        self.botonTokens
+        self.botonTokens.place(x= 270,y=45)
         self.botonTokens.config(width=12, height=3)
         #boton reporte errores
-        self.botonErrores = Button(master, text="Reporte Errores", command = self.reporteErrores )
+        self.botonErrores = Button(master, text="Reporte Errores", command = self.reporteErrores, background="#3B89DC" )
         self.botonErrores.pack()
-        self.botonErrores.place(x= 370,y=40)
+        self.botonErrores.place(x= 370,y=45)
         self.botonErrores.config(width=12, height=3)
         #boton reporte Manual tecnico
-        self.botonManual = Button(master, text="Manual de Usuario", )
+        self.botonManual = Button(master, text="Manual de Usuario", background="#3B89DC", command = self.manualTecnico )
         self.botonManual.pack()
-        self.botonManual.place(x=470,y=40)
+        self.botonManual.place(x=470,y=45   )
         self.botonManual.config(width=13, height=3)
         #boton reporte Manual usuario
-        self.botonManualUsuario = Button(master, text="Manual Tecnico", )
+        self.botonManualUsuario = Button(master, text="Manual Tecnico", background="#3B89DC", command= self.manualUsuario )
         self.botonManualUsuario.pack()
-        self.botonManualUsuario.place(x=575,y=40)
+        self.botonManualUsuario.place(x=575,y=45)
         self.botonManualUsuario.config(width=12, height=3)
+        # boton terminar programa
+        self.botonSalir = Button(master, text="Salir", background="#3B89DC", command= exit)
+        self.botonSalir.pack()
+        self.botonSalir.place(x=597,y=340)
+        self.botonSalir.config(width=8, height=3)
     
     
        
         #area de texto 
         self.textoDos = Text(root)
         self.textoDos.pack()
-        self.textoDos.config(width=67, height=10, font=("Consolas",12), 
+        self.textoDos.config(width=67, height=10, background= "white" ,font=("Consolas",12), 
              padx=0, pady=15)
-        self.textoDos.place(x=60,y=100)
+        self.textoDos.place(x=60,y=105)
         self.textoDos.insert(INSERT, self.texto  )
     
     def obtenerTexto(self):
@@ -96,7 +110,7 @@ class interfazGrafica():
 
     def reporteTokens(self):
         self.analizadorLexico.listaTokens
-        #para crear el html
+        #para crear el html 
         tokens = '<!DOCTYPE html> <html lang="es"> <head><meta charset="UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>REPORTE</title><linkhref="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"crossorigin="anonymous"/><body><h1 class="text-center">Reporte Tokens</h1><hr /><div class="m-2 p-2"><table class="table table-striped"><thead><tr> <tr> <th scope="col">Token.</th><th scope="col">Lexema</th><th scope="col">Fila.</th><th scope="col">Columna.</th></tr></thead><tbody>'
         for Token in self.analizadorLexico.listaTokens:
             tokens +='<tr> <td>'+ str(Token.tipo) +'</td> <td>'+ str(Token.lexema) +'</td><td>'+ str(Token.linea) +'</td><td>'+ str(Token.columna) +'</td></tr>'
@@ -118,6 +132,14 @@ class interfazGrafica():
         file = open('reporteErrores.html', "w")
         file.write(erroress)
         file.close()
+
+    def manualUsuario():
+        file = open('manualUsuario.html', "w")
+        file.close
+
+    def manualTecnico():
+        file = open('manualTecnico.html', "w")
+        file.close
       
     
     
@@ -126,20 +148,9 @@ class interfazGrafica():
       
     
     
-  
-
-            
-            
-            
-            
-            
-
-    
-
-
-                                    
  
 root = Tk()
 miVentana = interfazGrafica(root)
+root.configure(background= "#95E7E7" )
 root.geometry('720x480')
 root.mainloop()

@@ -38,7 +38,7 @@ class analizadorSintactico():
                         self.obtenerSiguiente()
                         if self.aux.tipo == "[":
                             self.obtenerSiguiente()
-                            self.resultado += "<!DOCTYPE <html> <head> <title> Mi Página de prueba </title> </head> <body>"
+                            self.resultado += "<!DOCTYPE <html><form>  <head> <title> Formulario LFP </title>   </head> <body></form> "
                             self.elementos()
 
     def limpiar(self):
@@ -53,24 +53,24 @@ class analizadorSintactico():
     def escribir(self):
         print(self.tipo)
         if self.tipo == "etiqueta":
-            self.resultado += "<div> <label> "+ self.valor + "</label> </div>\n"
+            self.resultado += "<form> <div> <label> "+ self.valor + "</label> </div>\n</form> "
             self.limpiar()
         # para hacer el cuadrito de texto 
         elif self.tipo == "texto":
-            self.resultado += '<div> <input id="news" type="text" placeholder="'+self.fondo+'" name="seach"</div> '
+            self.resultado += '<form> <div> <input id="news" type="text" placeholder="'+self.fondo+'" name="seach"</div>\n </form> '
             #self.resultado += ' <div> < input type="text" placeholder="'+self.fondo +'" > </div>\n' 
             self.limpiar()
         #para el radio button     
         elif self.tipo == "grupo-radio":
-            self.resultado += " <div> <p>" + self.nombre +":</p> </div>"
+            self.resultado += "<form>  <div> <p>" + self.nombre +":</p> </div></form> "
             if len(self.valores) > 0:
                 for valor in self.valores:
-                    self.resultado += '<div> <input type="radio" id="'+ valor +'"" name="fav_language" value="HTML"> <label for="html">'+ valor +'</label><br>  </div>'
+                    self.resultado += ' <div> <input type="radio" id="'+ valor +'"" name="fav_language" value="HTML"> <label for="html">'+ valor +'</label></div>'
                     #self.resultado += '<div> <input type="radio" id="'+ valor +'"" name="fav_language" value="HTML"> <label for="html">'+ valor +'</label><br>  </div>'
                     #self.resultado += '<div><input type="radio" id="'+ valor +'" name="'+ valor +'" value="HTML"></div>'
                     #self.resultado += '<div> <input type="radio" id="'+ valor +'" value="'+ valor +'"><label for="'+ valor +'">'+ valor +'</label></div>\n'
             else: 
-                self.resultado += '<div> <input type="radio" id="html" name="fav_language" value="HTML"> <label for="html">'+ self.valor +'</label><br>  </div>'
+                self.resultado += ' <div> <input type="radio" id="html" name="fav_language" value="HTML"> <label for="html">'+ self.valor +'</label></div> '
                 #self.resultado += '<div> <input type="radio" id="html" name="fav_language" value="HTML"> <label for="html">'+ self.valor +'</label><br>  </div>'
                 #self.resultado += '<div><input type="radio" id="'+ self.valor +'" name="'+ self.valor +'" value="HTML"></div>'   
                 #self.resultado += '<div> <input type="radio" id="'+ self.valor +'" value="'+ self.valor +'"><label for="'+ self.valor +'">'+ self.valor +'</label></div>\n'
@@ -78,26 +78,22 @@ class analizadorSintactico():
         #los que salen en list
         elif self.tipo == "grupo-option":
             
-            self.resultado += '<div> <label for="'+ self.nombre +'">'+ self.nombre +':</label> </div>\n'
-            self.resultado += '<select name="'+ self.nombre +'" id="'+ self.nombre +'">'
+            self.resultado += ' <div> <label for="'+ self.nombre +'">'+ self.nombre +':</label> </div>\n '
+            self.resultado += ' <select name="'+ self.nombre +'" id="'+ self.nombre +'"> '
             
             if len(self.valores) > 0:
                 for valor in self.valores:
-                    self.resultado += '<option value = "'+ valor +'">'+ valor +'</option>' 
+                    self.resultado += ' <option value = "'+ valor +'">'+ valor +'</option>' 
             else:
-                    self.resultado += '<option value = "'+ self.valor +'">'+ self.valor +'</option>'
+                    self.resultado += ' <option value = "'+ self.valor +'">'+ self.valor +'</option> '
             self.resultado += '</select>'
             self.limpiar()
         #para generar el boton 
         elif self.tipo == "boton":
-            #self.resultado += '<div> <button name="button">'+self.valor+'</button>  </div>'
-            #este si funciona
-            #self.resultado += '<div> <script type="text/javascript"> function info(){var ifrm = document.createElement("iframe"); ifrm.setAttribute("src", "info.html");ifrm.style.width ="100%"; ifrm.style.height = "400px"; document.getElementById("info").append(ifrm);} </script> <input type="button" onclick="info()"value='+self.valor+'> </div>'
-            
+           
             #este es el del iframe de prueba
-            self.resultado += '<div> <script <iframe src="pagina_fuente.html" width=290 height=250>Texto para cuando el navegador no conoce la etiqueta iframe</iframe> </script> <input type="button" onclick="button"value='+self.valor+'>  </div>'
-            #self.resultado += '<div><button id="'+self.valor+'" type="submit">"'+self.valor+'"</button></div>'
-            #self.resultado  += '<div> <button type="button">'+self.valor+'</button></div>\n'
+            self.resultado += ' <div>  <button </button> </div> '
+
             self.limpiar()
 
 
